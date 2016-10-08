@@ -12,3 +12,4 @@
 /composer.phar
 **/src/**/om/*
 **/src/**/map/*
+app/propel/

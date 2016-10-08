@@ -2,7 +2,8 @@
 <database defaultIdMethod="native" name="default" namespace="Deblan\Bundle\RtmpBundle\Model">
     <table name="stream">
         <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
-        <column name="uri" type="VARCHAR" size="255" required="true" />
+        <column name="host" type="VARCHAR" size="255" required="true" />
+        <column name="path" type="VARCHAR" size="255" required="true" />
          
         <behavior name="timestampable"/>
     </table>
@@ -16,7 +17,7 @@
         <behavior name="timestampable"/>
     </table>
 
-    <table name="account_has_stream">
+    <table name="account_has_stream" isCrossRef="true">
         <column name="stream_id" type="integer" required="true" primaryKey="true" />
         <column name="account_id" type="integer" required="true" primaryKey="true" />
 

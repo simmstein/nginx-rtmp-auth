@@ -5,6 +5,7 @@ namespace Deblan\Bundle\RtmpBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Simon Vieille <simon@deblan.fr>
@@ -12,12 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends Controller
 {
     /**
-     * @Route("/auth", name="auth")
      * @param Request $request
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
+     *
+     * @Route("/auth", name="auth")
      */
     public function authAction(Request $request)
     {
+        $authProvider = $this->container->get('rtmp.auth.propel_provider');
+
+        $authProvider->handleRequest($request);
+
+        return new Response(null, $authProvider->isValid() ? 200 : 401);
     }
 }
