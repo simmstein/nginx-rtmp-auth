@@ -1,0 +1,3 @@
+deblan_rtmp:
+    resource: "@DeblanRtmpBundle/Controller/"
+

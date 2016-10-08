@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="default" namespace="Deblan\Bundle\RtmpBundle\Model">
+    <table name="stream">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="uri" type="VARCHAR" size="255" required="true" />
+         
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="account">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+
+        <column name="channel" type="VARCHAR" size="255" required="true" />
+        <column name="key" type="VARCHAR" size="255" required="true" />
+
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="account_has_stream">
+        <column name="stream_id" type="integer" required="true" primaryKey="true" />
+        <column name="account_id" type="integer" required="true" primaryKey="true" />
+
+        <foreign-key foreignTable="stream" onDelete="cascade" onUpdate="cascade">
+            <reference local="stream_id" foreign="id"/>
+        </foreign-key>
+
+        <foreign-key foreignTable="account" onDelete="none" onUpdate="cascade">
+            <reference local="account_id" foreign="id"/>
+        </foreign-key>
+    </table>
+</database>
